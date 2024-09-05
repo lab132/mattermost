@@ -35,6 +35,7 @@ BUILD_DATE = $(shell date -u)
 BUILD_HASH = $(shell git rev-parse HEAD)
 BUILD_TAGS =
 
+-include config.override.mk
 
 # Docker
 export COMPOSE_PROJECT_NAME=mattermost-server

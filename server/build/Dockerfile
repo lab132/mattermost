@@ -26,11 +26,13 @@ RUN apt-get update \
   tzdata \
   && rm -rf /var/lib/apt/lists/*
 
+COPY mattermost-team-linux-amd64.tar.gz mattermost-team-linux-amd64.tar.gz
+
 # Set mattermost group/user and download Mattermost
 RUN mkdir -p /mattermost/data /mattermost/plugins /mattermost/client/plugins \
   && addgroup -gid ${PGID} mattermost \
   && adduser -q --disabled-password --uid ${PUID} --gid ${PGID} --gecos "" --home /mattermost mattermost \
-  && curl -L $MM_PACKAGE | tar -xvz \
+  && tar -xvzf mattermost-team-linux-amd64.tar.gz \
   && chown -R mattermost:mattermost /mattermost /mattermost/data /mattermost/plugins /mattermost/client/plugins
 
 # We should refrain from running as privileged user
